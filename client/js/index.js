@@ -385,6 +385,32 @@ const DiaUtil = {
     rs.address = this.getVal('patient_address');
     rs.name = this.getVal('patient_name');
     console.log('cout << got patient: ', rs);
+	
+	hospital.createNewPatient(
+    rs.name,
+      {
+        from: Dapp.userAddress,
+        gas: 1000000
+      },
+      function(e, txHash) {
+        if (!e) {
+          console.log("Create poll - transaction hash:");
+          console.log(txHash);
+          
+          var patientCreatedEvent = hospital.PatientCreated();
+          patientCreatedEvent.watch(function(error, result) {
+            if (!error) {
+              if (result.transactionHash == txHash) {
+                console.log("On Patient Created Sucessfull: " + result.args.patienAddress);
+				console.log(DiaUtil.getPatient(result.args.patienAddress));
+                //Dapp.addOptions(result.args.pollAddress, options);
+              }
+            }
+            patientCreatedEvent.stopWatching();
+          });          
+        }
+      }
+    );
     return rs;
   },
 
@@ -410,10 +436,12 @@ const DiaUtil = {
     document.getElementById('patient_switch').style.display = 'block'
   },
 
+  getPatient: function(address) {
+    var patientContract = Dapp.web3.eth.contract(
+      JSON.parse(compiledPatient.interface)
+    );
+    return patientContract.at(address);
+  },
 };
 
-var old = window.onload
-window.onload = function() {
-  old()
-  DiaUtil.loadHospital({ address: 'no you', name: 'no you again' })
-}
+
