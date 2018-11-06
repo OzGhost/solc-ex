@@ -399,7 +399,7 @@ const DiaUtil = {
       },
       function(e, txHash) {
         if (!e) {
-          console.log("Create poll - transaction hash:");
+          console.log("Create patient - transaction hash:");
           console.log(txHash);
           
           var patientCreatedEvent = hospital.PatientCreated();
