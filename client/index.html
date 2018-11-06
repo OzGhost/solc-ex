@@ -139,29 +139,114 @@
         </div>
       </div>
     </div>
+    
+    <hr/>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exam_dia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Examination Information</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            ...
+            <form>
+              <div class="form-group">
+                <label>Examination name</label>
+                <input type="text" class="form-control" id="exam_name">
+              </div>
+              <div class="form-group">
+                <label>Examination result</label>
+                <input type="text" class="form-control" id="exam_rs">
+              </div>
+              <div class="form-group">
+                <label>Cost</label>
+                <input type="number" class="form-control" id="exam_cost">
+              </div>
+              <div class="form-group">
+                <label>Status</label>
+                <select class="form-control" id="exam_status">
+                  <option>pending</option>
+                  <option>finished</option>
+                </select>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" onclick="DiaUtil.collectExamInput()" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
+    </div>
+
+    <button type="button" onclick="DiaUtil.collectExamInput()" class="btn btn-primary" data-toggle="modal" data-target="#exam_dia">
+      examination
+    </button>
+
+    <div class="modal fade" id="patient_dia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Patient Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label>Patient Address</label>
+                <input type="text" class="form-control" id="patient_address">
+              </div>
+              <div class="form-group">
+                <label>Patient Name</label>
+                <input type="text" class="form-control" id="patient_name">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="DiaUtil.collectPatientInput()">Save changes</button>
+          </div>
+        </div>
       </div>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Launch demo modal
-      </button>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#patient_dia">
+      patient
+    </button>
+
+    <div class="modal fade" id="hospital_dia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Hospital Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label>Hospital name</label>
+                <input type="text" class="form-control" id="hospital_name">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="DiaUtil.collectHospitalName()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hospital_dia">
+      hospital
+    </button>
 
   </div>
 

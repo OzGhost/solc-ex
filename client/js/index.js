@@ -327,3 +327,35 @@ window.addEventListener("load", function() {
 //   Dapp.setUserAddress(Dapp.web3.eth.accounts[0]);
 //   $(".nav-tabs .nav-link").removeClass("disabled");
 });
+
+
+const DiaUtil = {
+  collectExamInput: function() {
+    var rs = {};
+    rs.name = this.getVal('exam_name');
+    rs.rs = this.getVal('exam_rs');
+    rs.cost = this.getVal('exam_cost');
+    rs.status = this.getVal('exam_status');
+    console.log('cout << got exam: ', rs);
+    return rs;
+  },
+
+  getVal: function(id) {
+    return document.getElementById(id).value;
+  },
+
+  collectHospitalName: function() {
+    var name = this.getVal('hospital_name');
+    console.log('cout << got hospital name: ', name);
+    return name;
+  },
+
+  collectPatientInput: function() {
+    var rs = {};
+    rs.address = this.getVal('patient_address');
+    rs.name = this.getVal('patient_name');
+    console.log('cout << got patient: ', rs);
+    return rs;
+  },
+
+};
