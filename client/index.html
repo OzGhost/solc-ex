@@ -24,7 +24,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" id="create-polls-tab" data-toggle="tab" href="#panel-create-polls" role="tab" aria-controls="panel-create-polls"
-          aria-selected="false">Create Polls</a>
+          aria-selected="false">Create Hospital</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="voting-tab" data-toggle="tab" href="#panel-voting" role="tab" aria-controls="panel-voting"
@@ -258,13 +258,13 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="DiaUtil.collectHospitalName()">Save changes</button>
+            <button type="button" class="btn btn-primary" onclick="DiaUtil.collectHospitalInput()">Save changes</button>
           </div>
         </div>
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hospital_dia">
+    <button type="button" class="btn btn-primary" onClick=" DiaUtil.loadHospital({ address: 'no you', name: 'no you again' }) ">
       hospital
     </button>
 

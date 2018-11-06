@@ -367,6 +367,10 @@ const DiaUtil = {
     return document.getElementById(id).value;
   },
 
+  setVal: function(id, val) {
+    document.getElementById(id).value = val;
+  },
+
   collectHospitalInput: function() {
     var rs = {};
     rs.name = this.getVal('hospital_name');
@@ -383,14 +387,24 @@ const DiaUtil = {
     console.log('cout << got patient: ', rs);
     return rs;
   },
- getHospital: function() {
+
+  getHospital: function() {
     var factoryContract = Dapp.web3.eth.contract(
       JSON.parse(compiledHospital.interface)
     );
     return factoryContract.at(Dapp.hospitalAddress);
   },
-  loadExams: function(exs) {
-    
+
+  loadHospital: function(input) {
+    this.setVal('hospital_address', input.address);
+    this.setVal('hospital_name', input.name);
+    $('#hospital_dia').modal('show');
   },
 
 };
+
+var old = window.onload
+window.onload = function() {
+  old()
+  DiaUtil.loadHospital({ address: 'no you', name: 'no you again' })
+}
