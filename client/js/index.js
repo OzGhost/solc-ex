@@ -362,4 +362,8 @@ const DiaUtil = {
     return rs;
   },
 
+  loadExams: function(exs) {
+    
+  }
+
 };
