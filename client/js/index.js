@@ -432,6 +432,12 @@ const DiaUtil = {
     );
     return patientContract.at(address);
   },
+  getHospital: function(address) {
+    var hospitalContract = Dapp.web3.eth.contract(
+      JSON.parse(compiledFactory.interface)
+    );
+    return hospitalContract.at(address);
+  },
 };
 
 
