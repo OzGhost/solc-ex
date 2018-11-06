@@ -2,6 +2,7 @@ const Dapp = {
   userAddress: undefined,
   pollFactoryAddress: null,
   hospitalAddress: null,
+  patientAddress: null,
   createNewAccount: function() {
     Dapp.web3.personal.newAccount(
       prompt("Please enter your password"),
@@ -406,7 +407,7 @@ const DiaUtil = {
               if (result.transactionHash == txHash) {
                 console.log("On Patient Created Sucessfull: " + result.args.patienAddress);
 				console.log(DiaUtil.getPatient(result.args.patienAddress));
-                //Dapp.addOptions(result.args.pollAddress, options);
+				Dapp.patientAddress = result.args.patienAddress
               }
             }
             patientCreatedEvent.stopWatching();
