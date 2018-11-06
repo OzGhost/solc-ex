@@ -449,7 +449,7 @@ const DiaUtil = {
   },
   getHospital: function(address) {
     var hospitalContract = Dapp.web3.eth.contract(
-      JSON.parse(compiledFactory.interface)
+      JSON.parse(compiledHospital.interface)
     );
     return hospitalContract.at(address);
   },
