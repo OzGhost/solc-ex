@@ -75,6 +75,7 @@ const Dapp = {
     );
     console.log("Deploying poll factory...");
     pollfactoryContract.new(
+		
       {
         from: Dapp.userAddress,
         data: compiledFactory.bytecode,
@@ -93,12 +94,13 @@ const Dapp = {
       }
     );
   },
-  deployHospital: function() {
+  deployHospital: function(input) {
     var hospitalContract = Dapp.web3.eth.contract(
       JSON.parse(compiledHospital.interface)
     );
     console.log("Deploying hospital...");
     hospitalContract.new(
+		input.name,
       {
         from: Dapp.userAddress,
         data: compiledHospital.bytecode,
