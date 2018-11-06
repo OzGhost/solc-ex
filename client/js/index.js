@@ -489,6 +489,10 @@ const mc = {
       {examName: 'abc', examResult: 'die for sue', cost: 0, status: false},
       {examName: 'abc', examResult: 'die for sue', cost: 0, status: false},
     ]);
+  },
+  
+  updateStatus: function() {
+    console.log('cout << mc::updateStatus send update status request');
   }
 };
 
