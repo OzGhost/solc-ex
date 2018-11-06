@@ -1,6 +1,7 @@
 const Dapp = {
   userAddress: undefined,
   pollFactoryAddress: null,
+  hospitalAddress: null,
   createNewAccount: function() {
     Dapp.web3.personal.newAccount(
       prompt("Please enter your password"),
@@ -88,6 +89,25 @@ const Dapp = {
           $("#viewPolls").css("display", "block");
           $("#deployPollFactory").css("display", "none");
           console.log("PollFactory's address: " + contract.address);
+        }
+      }
+    );
+  },
+  deployHospital: function() {
+    var hospitalContract = Dapp.web3.eth.contract(
+      JSON.parse(compiledHospital.interface)
+    );
+    console.log("Deploying hospital...");
+    hospitalContract.new(
+      {
+        from: Dapp.userAddress,
+        data: compiledHospital.bytecode,
+        gas: "4700000"
+      },
+      function(e, contract) {
+        if (typeof contract.address !== "undefined") {
+          Dapp.hospitalAddress = contract.address;
+          console.log("Hospital's address: " + contract.address);
         }
       }
     );
@@ -320,7 +340,7 @@ window.addEventListener("load", function() {
   } else {
     console.log("No Web3 Detected... using HTTP Provider");
     Dapp.web3 = new Web3(
-      new Web3.providers.HttpProvider("http://localhost:8545")
+      new Web3.providers.HttpProvider("http://127.0.0.1:7545")
     );
   }
 
@@ -330,6 +350,7 @@ window.addEventListener("load", function() {
 
 
 const DiaUtil = {
+  hospitalAddress: null,
   collectExamInput: function() {
     var rs = {};
     rs.name = this.getVal('exam_name');
@@ -346,6 +367,10 @@ const DiaUtil = {
     return document.getElementById(id).value;
   },
 
+  setVal: function(id, val) {
+    document.getElementById(id).value = val;
+  },
+
   collectHospitalInput: function() {
     var rs = {};
     rs.name = this.getVal('hospital_name');
@@ -355,15 +380,68 @@ const DiaUtil = {
   },
 
   collectPatientInput: function() {
+	var hospital = this.getHospital();
     var rs = {};
     rs.address = this.getVal('patient_address');
     rs.name = this.getVal('patient_name');
     console.log('cout << got patient: ', rs);
+	
+	hospital.createNewPatient(
+    rs.name,
+      {
+        from: Dapp.userAddress,
+        gas: 1000000
+      },
+      function(e, txHash) {
+        if (!e) {
+          console.log("Create poll - transaction hash:");
+          console.log(txHash);
+          
+          var patientCreatedEvent = hospital.PatientCreated();
+          patientCreatedEvent.watch(function(error, result) {
+            if (!error) {
+              if (result.transactionHash == txHash) {
+                console.log("On Patient Created Sucessfull: " + result.args.patienAddress);
+				console.log(DiaUtil.getPatient(result.args.patienAddress));
+                //Dapp.addOptions(result.args.pollAddress, options);
+              }
+            }
+            patientCreatedEvent.stopWatching();
+          });          
+        }
+      }
+    );
     return rs;
   },
 
-  loadExams: function(exs) {
-    
-  }
+  getHospital: function() {
+    var factoryContract = Dapp.web3.eth.contract(
+      JSON.parse(compiledHospital.interface)
+    );
+    return factoryContract.at(Dapp.hospitalAddress);
+  },
 
+  loadHospital: function(input) {
+    if (input) {
+      this.setVal('hospital_address', input.address);
+      this.setVal('hospital_name', input.name);
+    }
+    $('#hospital_dia').modal('show');
+  },
+
+  hospitalSubmit: function() {
+    var input = this.collectHospitalInput();
+    $('#hospital_dia').modal('hide');
+    Dapp.deployHospital(input);
+    document.getElementById('patient_switch').style.display = 'block'
+  },
+
+  getPatient: function(address) {
+    var patientContract = Dapp.web3.eth.contract(
+      JSON.parse(compiledPatient.interface)
+    );
+    return patientContract.at(address);
+  },
 };
+
+
