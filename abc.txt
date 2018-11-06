@@ -43,6 +43,10 @@ contract Hospital{
     address[] public examinations;
     address[] public patients;
     address lastestPatient;
+	string hospitalName;
+	constructor (string name) public {
+	    hospitalName = name;
+	}
     
     function createNewPatient(string name) public {
         lastestPatient = new Patient(name);
