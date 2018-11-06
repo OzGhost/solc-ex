@@ -145,8 +145,17 @@
       </div>
 
       <div class="tab-pane" id="panel-exam" role="tabpanel" aria-labelledby="exam-tab">
-        <h1>NO YOU</h1>
-        <div class="container pt-3" id="votingContainer"> </div>
+        <form>
+          <div class="form-group">
+            <label>Examination address</label>
+            <input type="text" class="form-control" id="put_exam_address">
+          </div>
+          <div class="form-group">
+            <label>Examination result</label>
+            <input type="text" class="form-control" id="put_exam_rs">
+          </div>
+        </form>
+        <button type="button" onclick="mc.updateStatus()" class="btn btn-primary">Submit</button>
       </div>
 
     </div> <!-- end of tabs -->
@@ -269,10 +278,6 @@
 
     <button style="display: inline-block" type="button" class="btn btn-primary" onClick=" DiaUtil.loadHospital({ address: 'no you', name: 'no you again' }) ">
       hospital
-    </button>
-
-    <button style="display: inline-block" type="button" class="btn btn-primary" onClick="mc.updateStatus()">
-      update status
     </button>
 
   </div>

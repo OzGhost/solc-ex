@@ -486,15 +486,19 @@ const mc = {
 
   mb: function() {
     mc.buildExams('votingContainer', [
-      {examName: 'abc', examResult: 'die for sue', cost: 0, completed: false},
-      {examName: 'abc', examResult: 'die for sue', cost: 0, completed: false},
-      {examName: 'abc', examResult: 'die for sue', cost: 0, completed: false},
-      {examName: 'abc', examResult: 'die for sue', cost: 0, completed: false},
+      {examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
     ]);
   },
   
   updateStatus: function() {
-    console.log('cout << mc::updateStatus send update status request');
+    var rs = {};
+    rs.address = DiaUtil.getVal('put_exam_address');
+    rs.result = DiaUtil.getVal('put_exam_rs');
+    console.log('cout << mc::updateStatus send update status request', rs);
+    return rs;
   }
 };
 
