@@ -17,12 +17,16 @@ contract PollFactory{
 
 }
 
-contract Poll{
+contract PatientHistory{
+    struct ExaminationRequest {
+        string examination_names;
+        string 
+    }
 
-    struct  Option {
+
+    struct  Hospital {
         string name;
-        uint votedCount;
-        mapping(address => bool) voters;
+        string[] examinations;
     }
 
     string public question;
