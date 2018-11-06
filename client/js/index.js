@@ -1,6 +1,7 @@
 const Dapp = {
   userAddress: undefined,
   pollFactoryAddress: null,
+  hospitalAddress: null,
   createNewAccount: function() {
     Dapp.web3.personal.newAccount(
       prompt("Please enter your password"),
@@ -88,6 +89,25 @@ const Dapp = {
           $("#viewPolls").css("display", "block");
           $("#deployPollFactory").css("display", "none");
           console.log("PollFactory's address: " + contract.address);
+        }
+      }
+    );
+  },
+  deployHospital: function() {
+    var hospitalContract = Dapp.web3.eth.contract(
+      JSON.parse(compiledHospital.interface)
+    );
+    console.log("Deploying hospital...");
+    hospitalContract.new(
+      {
+        from: Dapp.userAddress,
+        data: compiledHospital.bytecode,
+        gas: "4700000"
+      },
+      function(e, contract) {
+        if (typeof contract.address !== "undefined") {
+          Dapp.hospitalAddress = contract.address;
+          console.log("Hospital's address: " + contract.address);
         }
       }
     );
@@ -320,7 +340,7 @@ window.addEventListener("load", function() {
   } else {
     console.log("No Web3 Detected... using HTTP Provider");
     Dapp.web3 = new Web3(
-      new Web3.providers.HttpProvider("http://localhost:8545")
+      new Web3.providers.HttpProvider("http://127.0.0.1:7545")
     );
   }
 
@@ -330,6 +350,7 @@ window.addEventListener("load", function() {
 
 
 const DiaUtil = {
+  hospitalAddress: null,
   collectExamInput: function() {
     var rs = {};
     rs.name = this.getVal('exam_name');
@@ -355,15 +376,21 @@ const DiaUtil = {
   },
 
   collectPatientInput: function() {
+	var hospital = this.getHospital();
     var rs = {};
     rs.address = this.getVal('patient_address');
     rs.name = this.getVal('patient_name');
     console.log('cout << got patient: ', rs);
     return rs;
   },
-
+ getHospital: function() {
+    var factoryContract = Dapp.web3.eth.contract(
+      JSON.parse(compiledHospital.interface)
+    );
+    return factoryContract.at(Dapp.hospitalAddress);
+  },
   loadExams: function(exs) {
     
-  }
+  },
 
 };
