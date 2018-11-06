@@ -2,6 +2,7 @@ const Dapp = {
   userAddress: undefined,
   pollFactoryAddress: null,
   hospitalAddress: null,
+  patientAddress: null,
   createNewAccount: function() {
     Dapp.web3.personal.newAccount(
       prompt("Please enter your password"),
@@ -398,7 +399,7 @@ const DiaUtil = {
       },
       function(e, txHash) {
         if (!e) {
-          console.log("Create poll - transaction hash:");
+          console.log("Create patient - transaction hash:");
           console.log(txHash);
           
           var patientCreatedEvent = hospital.PatientCreated();
@@ -407,7 +408,7 @@ const DiaUtil = {
               if (result.transactionHash == txHash) {
                 console.log("On Patient Created Sucessfull: " + result.args.patienAddress);
 				console.log(DiaUtil.getPatient(result.args.patienAddress));
-                //Dapp.addOptions(result.args.pollAddress, options);
+				Dapp.patientAddress = result.args.patienAddress
               }
             }
             patientCreatedEvent.stopWatching();
@@ -448,7 +449,7 @@ const DiaUtil = {
   },
   getHospital: function(address) {
     var hospitalContract = Dapp.web3.eth.contract(
-      JSON.parse(compiledFactory.interface)
+      JSON.parse(compiledHospital.interface)
     );
     return hospitalContract.at(address);
   },
