@@ -401,7 +401,8 @@ const DiaUtil = {
           patientCreatedEvent.watch(function(error, result) {
             if (!error) {
               if (result.transactionHash == txHash) {
-                console.log("On PollCreated -> Start adding options:" + result.args.patienAddress);
+                console.log("On Patient Created Sucessfull: " + result.args.patienAddress);
+				console.log(DiaUtil.getPatient(result.args.patienAddress));
                 //Dapp.addOptions(result.args.pollAddress, options);
               }
             }
@@ -425,11 +426,12 @@ const DiaUtil = {
     this.setVal('hospital_name', input.name);
     $('#hospital_dia').modal('show');
   },
-
+ getPatient: function(address) {
+    var patientContract = Dapp.web3.eth.contract(
+      JSON.parse(compiledPatient.interface)
+    );
+    return patientContract.at(address);
+  },
 };
 
-var old = window.onload
-window.onload = function() {
-  old()
-  DiaUtil.loadHospital({ address: 'no you', name: 'no you again' })
-}
+
