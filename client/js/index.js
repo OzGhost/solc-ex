@@ -336,6 +336,8 @@ const DiaUtil = {
     rs.rs = this.getVal('exam_rs');
     rs.cost = this.getVal('exam_cost');
     rs.status = this.getVal('exam_status');
+    rs.hospital = this.getVal('exam_hospital_address');
+    rs.patient = this.getVal('exam_patient_address');
     console.log('cout << got exam: ', rs);
     return rs;
   },
@@ -344,10 +346,12 @@ const DiaUtil = {
     return document.getElementById(id).value;
   },
 
-  collectHospitalName: function() {
-    var name = this.getVal('hospital_name');
-    console.log('cout << got hospital name: ', name);
-    return name;
+  collectHospitalInput: function() {
+    var rs = {};
+    rs.name = this.getVal('hospital_name');
+    rs.address = this.getVal('hospital_address');
+    console.log('cout << got hospital: ', rs);
+    return rs;
   },
 
   collectPatientInput: function() {
