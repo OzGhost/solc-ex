@@ -381,6 +381,31 @@ const DiaUtil = {
     rs.address = this.getVal('patient_address');
     rs.name = this.getVal('patient_name');
     console.log('cout << got patient: ', rs);
+	
+	hospital.createNewPatient(
+    rs.name,
+      {
+        from: Dapp.userAddress,
+        gas: 1000000
+      },
+      function(e, txHash) {
+        if (!e) {
+          console.log("Create poll - transaction hash:");
+          console.log(txHash);
+          
+          var patientCreatedEvent = hospital.PatientCreated();
+          patientCreatedEvent.watch(function(error, result) {
+            if (!error) {
+              if (result.transactionHash == txHash) {
+                console.log("On PollCreated -> Start adding options:" + result.args.patienAddress);
+                //Dapp.addOptions(result.args.pollAddress, options);
+              }
+            }
+            patientCreatedEvent.stopWatching();
+          });          
+        }
+      }
+    );
     return rs;
   },
  getHospital: function() {
