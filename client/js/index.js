@@ -470,6 +470,7 @@ const mc = {
     rs += '<table class="table table-striped">'
         +'<thead class="my-header">'
         +'<tr>'
+        +'<th>Address</th>'
         +'<th>Name</th>'
         +'<th>Result</th>'
         +'<th>Cost</th>'
@@ -487,6 +488,7 @@ const mc = {
 
   buildSingleExamRow: function(ex) {
     return '<tr>'
+        + '<td>'+ex.address+'</td>'
         + '<td>'+ex.examName+'</td>'
         + '<td>'+ex.examResult+'</td>'
         + '<td>'+ex.cost+'</td>'
@@ -496,10 +498,12 @@ const mc = {
 
   mb: function() {
     mc.buildExams('votingContainer', [
-      {examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
-      {examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
-      {examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
-      {examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {address: 'no.01', examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {address: 'no.01', examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {address: 'no.01', examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {address: 'no.01', examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {address: 'no.01', examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
+      {address: 'no.01', examName: 'abc', examResult: 'die for sure', cost: 0, completed: false},
     ]);
   },
   
