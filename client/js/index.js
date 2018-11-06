@@ -109,6 +109,7 @@ const Dapp = {
       function(e, contract) {
         if (typeof contract.address !== "undefined") {
           Dapp.hospitalAddress = contract.address;
+          DiaUtil.setVal('pn_hospital_address', contract.address);
           console.log("Hospital's address: " + contract.address);
         }
       }
@@ -436,7 +437,7 @@ const DiaUtil = {
     var input = this.collectHospitalInput();
     $('#hospital_dia').modal('hide');
     Dapp.deployHospital(input);
-    document.getElementById('patient_switch').style.display = 'block'
+    document.getElementById('patient_switch').style.display = 'inline-block'
   },
 
   getPatient: function(address) {
