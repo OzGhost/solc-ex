@@ -3,14 +3,23 @@ pragma solidity ^0.4.17;
 contract ExaminationRequest {
     address public patientAddress;
     string examName;
-    string examResult;
+    string public examResult;
     int cost;
-    bool completed;
+    bool public completed;
     
     constructor(string name, int costParam, address patientAddressParam) public {
         examName = name;
         cost = costParam;
         patientAddress = patientAddressParam;
+        completed = false;
+    }
+    
+    function updateResult(string result) public {
+        examResult = result;
+    }
+    
+    function updateStatus(bool completed) public {
+        completed = completed;
     }
 }
 
@@ -29,14 +38,11 @@ contract Patient {
 contract Hospital{
     event PatientCreated(address patienAddress);
     event ExamCreated(address exam);
+    event ExamUpdated(address exam);
     
     address[] public examinations;
     address[] public patients;
     address lastestPatient;
-	string hospitalName;
-	constructor (string name) public {
-	    hospitalName = name;
-	}
     
     function createNewPatient(string name) public {
         lastestPatient = new Patient(name);
@@ -52,6 +58,13 @@ contract Hospital{
     
     function getPatients() public view returns(address[]){
         return patients;
+    }
+    
+    function updateExaminationResult(address examinationRequestAddress, string result) public {
+        ExaminationRequest newExam = ExaminationRequest(examinationRequestAddress);
+        newExam.updateStatus(true);
+        newExam.updateResult(result);
+        emit ExamUpdated(examinationRequestAddress);
     }
 }
 
