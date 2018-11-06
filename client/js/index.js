@@ -109,7 +109,7 @@ const Dapp = {
       function(e, contract) {
         if (typeof contract.address !== "undefined") {
           Dapp.hospitalAddress = contract.address;
-          DiaUtil.setVal('pn_hospital_address', contract.address);
+          store.setHospital({address: contract.address});
           console.log("Hospital's address: " + contract.address);
         }
       }
@@ -503,4 +503,31 @@ const mc = {
   }
 };
 
+const store = {
+  hospital: {},
+  patient: {},
+  exam: {},
+
+  setHospital: function(input) {
+    this.hospital = input || {};
+    this.reloadHospitalAddress();
+  },
+
+  reloadHospitalAddress: function() {
+    this.setVal('pn_hospital_address', this.hospital.address)
+  },
+
+  setVal: function(id, val) {
+    document.getElementById(id).innerHTML = val;
+  },
+
+  setPatient: function(input) {
+    this.patient = input || {};
+    this.reloadPatientAddress();
+  },
+
+  reloadPatientAddress: function() {
+    this.setVal('pn_patient_address', this.patient.address)
+  },
+}
 
