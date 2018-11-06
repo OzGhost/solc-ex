@@ -396,9 +396,18 @@ const DiaUtil = {
   },
 
   loadHospital: function(input) {
-    this.setVal('hospital_address', input.address);
-    this.setVal('hospital_name', input.name);
+    if (input) {
+      this.setVal('hospital_address', input.address);
+      this.setVal('hospital_name', input.name);
+    }
     $('#hospital_dia').modal('show');
+  },
+
+  hospitalSubmit: function() {
+    var input = this.collectHospitalInput();
+    $('#hospital_dia').modal('hide');
+    Dapp.deployHospital(input);
+    document.getElementById('patient_switch').style.display = 'block'
   },
 
 };
