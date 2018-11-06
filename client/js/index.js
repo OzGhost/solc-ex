@@ -452,6 +452,14 @@ const DiaUtil = {
     );
     return hospitalContract.at(address);
   },
+
+  loadExam: function() {
+    store.setHospital({address: 'myhospitaladdress'});
+    store.setPatient({address: 'mypatientaddress'});
+    this.setVal('exam_hospital_address', store.getHospital().address);
+    this.setVal('exam_patient_address', store.getPatient().address);
+    $('#exam_dia').modal('show');
+  }
 };
 
 const mc = {
@@ -529,5 +537,13 @@ const store = {
   reloadPatientAddress: function() {
     this.setVal('pn_patient_address', this.patient.address)
   },
-}
+
+  getHospital: function() {
+    return this.hospital;
+  },
+
+  getPatient: function() {
+    return this.patient;
+  },
+};
 
