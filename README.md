@@ -1,1 +1,1 @@
-# solc-ex
+# dapp-voting
