@@ -2,7 +2,11 @@
 
 <head>
   <title>Patient History</title>
-  <style></style>
+  <style>
+.my-header th {
+  background: #64b6e5;
+}
+  </style>
 
   <link rel="stylesheet" href="./bootstrap.min.css" />
 </head>
@@ -28,7 +32,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" id="voting-tab" data-toggle="tab" href="#panel-voting" role="tab" aria-controls="panel-voting"
-          aria-selected="false">Voting</a>
+          aria-selected="false">Patients History</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="voting-tab" data-toggle="tab" href="#panel-exam" role="tab" aria-controls="panel-exam"
@@ -129,12 +133,11 @@
         <div class="container pt-3">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Poll address</span>
+              <span class="input-group-text" id="basic-addon1">Patient address</span>
             </div>
             <input type="text" id="inputPollAddress" class="form-control" placeholder="0x" aria-label="0x" aria-describedby="basic-addon1">
             <div class="input-group-append">
-              <button class="btn btn-primary" type="button" id="btnLoadPoll" onclick="Dapp.loadPollForVoting()">Load Poll</button>
-              <button class="btn btn-secondary" type="button" id="btnViewPoll" onclick="Dapp.viewPollResult()">View Result</button>
+              <button class="btn btn-primary" type="button" id="btnLoadPoll" onclick="Dapp.loadPollForVoting()">Load Patient</button>
             </div>
           </div>
         </div>
@@ -198,7 +201,7 @@
       </div>
     </div>
 
-    <button type="button" onclick="DiaUtil.collectExamInput()" class="btn btn-primary" data-toggle="modal" data-target="#exam_dia">
+    <button style="display: none" type="button" onclick="DiaUtil.collectExamInput()" class="btn btn-primary" data-toggle="modal" data-target="#exam_dia">
       examination
     </button>
 
@@ -264,7 +267,7 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary" onClick=" DiaUtil.loadHospital({ address: 'no you', name: 'no you again' }) ">
+    <button style="display: none" type="button" class="btn btn-primary" onClick=" DiaUtil.loadHospital({ address: 'no you', name: 'no you again' }) ">
       hospital
     </button>
 
