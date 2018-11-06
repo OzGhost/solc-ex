@@ -84,7 +84,7 @@
             </div>
             <div class="col-lg-2">
               <button type="button" style="float: right;"
-                      class="btn btn-primary btn-sm" onclick="Dapp.deployHospital()"
+                      class="btn btn-primary btn-sm" onclick="DiaUtil.loadHospital()"
                       id="deployPollFactory">Deploy Hospital</button>
             </div>
           </div>
@@ -231,7 +231,7 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#patient_dia">
+    <button style="display: none" id="patient_switch" type="button" class="btn btn-primary" data-toggle="modal" data-target="#patient_dia">
       patient
     </button>
 
@@ -248,7 +248,7 @@
             <form>
               <div class="form-group">
                 <label>Hospital address</label>
-                <input type="text" class="form-control" id="hospital_address">
+                <input type="text" class="form-control" id="hospital_address" readonly>
               </div>
               <div class="form-group">
                 <label>Hospital name</label>
@@ -258,7 +258,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="DiaUtil.collectHospitalInput()">Save changes</button>
+            <button type="button" class="btn btn-primary" onclick="DiaUtil.hospitalSubmit()">Save changes</button>
           </div>
         </div>
       </div>
