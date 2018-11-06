@@ -201,7 +201,7 @@
       </div>
     </div>
 
-    <button style="display: none" type="button" onclick="DiaUtil.collectExamInput()" class="btn btn-primary" data-toggle="modal" data-target="#exam_dia">
+    <button style="display: inline-block" type="button" onclick="DiaUtil.collectExamInput()" class="btn btn-primary" data-toggle="modal" data-target="#exam_dia">
       examination
     </button>
 
@@ -234,7 +234,7 @@
       </div>
     </div>
 
-    <button style="display: none" id="patient_switch" type="button" class="btn btn-primary" data-toggle="modal" data-target="#patient_dia">
+    <button style="display: inline-block" id="patient_switch" type="button" class="btn btn-primary" data-toggle="modal" data-target="#patient_dia">
       patient
     </button>
 
@@ -267,8 +267,12 @@
       </div>
     </div>
 
-    <button style="display: none" type="button" class="btn btn-primary" onClick=" DiaUtil.loadHospital({ address: 'no you', name: 'no you again' }) ">
+    <button style="display: inline-block" type="button" class="btn btn-primary" onClick=" DiaUtil.loadHospital({ address: 'no you', name: 'no you again' }) ">
       hospital
+    </button>
+
+    <button style="display: inline-block" type="button" class="btn btn-primary" onClick="mc.updateStatus()">
+      update status
     </button>
 
   </div>

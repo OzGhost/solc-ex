@@ -478,17 +478,21 @@ const mc = {
         + '<td>'+ex.examName+'</td>'
         + '<td>'+ex.examResult+'</td>'
         + '<td>'+ex.cost+'</td>'
-        + '<td>'+(ex.status ? 'Finished' : 'Pending')+'</td>'
+        + '<td>'+(ex.completed ? 'Finished' : 'Pending')+'</td>'
         + '</tr>';
   },
 
   mb: function() {
     mc.buildExams('votingContainer', [
-      {examName: 'abc', examResult: 'die for sue', cost: 0, status: false},
-      {examName: 'abc', examResult: 'die for sue', cost: 0, status: false},
-      {examName: 'abc', examResult: 'die for sue', cost: 0, status: false},
-      {examName: 'abc', examResult: 'die for sue', cost: 0, status: false},
+      {examName: 'abc', examResult: 'die for sue', cost: 0, completed: false},
+      {examName: 'abc', examResult: 'die for sue', cost: 0, completed: false},
+      {examName: 'abc', examResult: 'die for sue', cost: 0, completed: false},
+      {examName: 'abc', examResult: 'die for sue', cost: 0, completed: false},
     ]);
+  },
+  
+  updateStatus: function() {
+    console.log('cout << mc::updateStatus send update status request');
   }
 };
 
